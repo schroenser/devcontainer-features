@@ -5,6 +5,6 @@
     "description": "Adds opinionated settings for Claude Code.",
     "options": {},
     "installsAfter": [
-        "ghcr.io/devcontainers/features/common-utils"
+        "ghcr.io/anthropics/devcontainer-features/claude-code"
     ]
 }
