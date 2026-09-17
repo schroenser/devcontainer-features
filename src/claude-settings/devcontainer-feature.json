@@ -1,7 +1,7 @@
 {
     "name": "Opinionated settings for Claude Code",
     "id": "claude-settings",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Adds opinionated settings for Claude Code.",
     "options": {},
     "installsAfter": [
