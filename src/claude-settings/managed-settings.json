@@ -59,6 +59,7 @@
       ]
     },
     "enabled": true,
+    "enableWeakerNestedSandbox": false,
     "failIfUnavailable": true,
     "filesystem": {
       "allowRead": [

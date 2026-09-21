@@ -1,9 +1,15 @@
 {
     "name": "Opinionated settings for Claude Code",
     "id": "claude-settings",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Adds opinionated settings for Claude Code.",
-    "options": {},
+    "options": {
+        "weakerNestedSandbox": {
+            "type": "boolean",
+            "default": false,
+            "description": "Set sandbox.enableWeakerNestedSandbox to true. Needed in unprivileged containers, where bubblewrap cannot mount a fresh /proc. Reduces sandbox strength, so only enable it when the container itself is the isolation boundary you rely on."
+        }
+    },
     "installsAfter": [
         "ghcr.io/anthropics/devcontainer-features/claude-code"
     ]
