@@ -1,7 +1,7 @@
 {
     "name": "Opinionated settings for Claude Code",
     "id": "claude-settings",
-    "version": "1.0.2",
+    "version": "1.1.2",
     "description": "Adds opinionated settings for Claude Code.",
     "options": {
         "weakerNestedSandbox": {

@@ -1,27 +1,29 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "autoUpdatesChannel": "stable",
   "env": {
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
-    "DISABLE_AUTOUPDATER": "1"
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "blockReadsOutsideWorkingDirectories": true,
+    "defaultMode": "auto",
     "deny": [
       "Bash(docker compose:*)",
       "Bash(docker-compose:*)",
       "Bash(docker:*)",
+      "Bash(podman compose:*)",
+      "Bash(podman-compose:*)",
+      "Bash(podman:*)",
       "Read(**/.env)",
+      "Read(**/.env.*)",
       "Read(~/.aws/**)",
       "Read(~/.npmrc)",
       "Read(~/.ssh/**)"
     ],
-    "disableAutoMode": "disable",
     "disableBypassPermissionsMode": "disable"
   },
   "sandbox": {
     "allowUnsandboxedCommands": false,
-    "autoAllowBashIfSandboxed": true,
     "credentials": {
       "envVars": [
         {
