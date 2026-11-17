@@ -6,7 +6,6 @@
     "DO_NOT_TRACK": "1"
   },
   "permissions": {
-    "blockReadsOutsideWorkingDirectories": true,
     "defaultMode": "auto",
     "allow": [
       "Bash(bd *)",
