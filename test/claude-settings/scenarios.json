@@ -1,2 +1,18 @@
 {
+    "weaker_nested_sandbox": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "claude-settings": {
+                "weakerNestedSandbox": true
+            }
+        }
+    },
+    "github_cli_token_masking": {
+        "image": "debian:bookworm",
+        "features": {
+            "claude-settings": {
+                "gitHubCliTokenMasking": true
+            }
+        }
+    }
 }
