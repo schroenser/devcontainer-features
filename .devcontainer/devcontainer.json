@@ -3,7 +3,8 @@
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "runArgs": [
     "--userns=keep-id",
-    "--security-opt", "label=disable"
+    "--security-opt",
+    "label=disable"
   ],
   "customizations": {
     "vscode": {
@@ -23,8 +24,18 @@
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/node": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:4.1.1": {}
+    "ghcr.io/devcontainers/features/node:2.1.2": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    "ghcr.io/schroenser/devcontainer-features/claude-settings:1.2.0": {
+      "weakerNestedSandbox": true
+    }
   },
-  "updateContentCommand": "npm install -g @devcontainers/cli"
+  "mounts": [
+    "source=claude-shared,target=/home/vscode/.claude,type=volume",
+    "source=claude-projects-${devcontainerId},target=/home/vscode/.claude/projects,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
+  "updateContentCommand": ".devcontainer/postCreate.sh"
 }
