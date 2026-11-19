@@ -16,6 +16,7 @@ Adds opinionated settings for Claude Code.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | weakerNestedSandbox | Set sandbox.enableWeakerNestedSandbox to true. Needed in unprivileged containers, where bubblewrap cannot mount a fresh /proc. Reduces sandbox strength, so only enable it when the container itself is the isolation boundary you rely on. | boolean | false |
+| gitHubCliTokenMasking | Mask GH_TOKEN in the sandbox instead of denying it. Sandboxed commands see a placeholder, and the sandbox proxy injects the real token only into requests to api.github.com. Also allows api.github.com and enables TLS termination in the sandbox network proxy, which the injection requires. | boolean | false |
 
 
 
