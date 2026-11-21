@@ -67,10 +67,28 @@ if [ "$GITHUBCLITOKENMASKING" = "true" ]; then
     .sandbox.credentials.envVars |= map(
       if .name == "GH_TOKEN" then .mode = "mask" | .injectHosts = ["api.github.com"] else . end
     )
-    | .sandbox.network.allowedDomains |= (. + ["api.github.com"] | unique)
+    | .sandbox.network.allowedDomains |= (. + ["api.github.com", "results-receiver.actions.githubusercontent.com"] | unique)
     | .sandbox.network.tlsTerminate //= {}
+    | .sandbox.filesystem.allowWrite |= (. + ["~/.cache/gh", "/.jbdevcontainer/gh"] | unique)
+    | .sandbox.filesystem.allowRead |= (. + ["~/.cache/gh"] | unique)
   '
   echo "  GH_TOKEN: masked, injected for api.github.com"
+
+  # gh caches run logs in ${XDG_CACHE_HOME:-~/.cache}/gh. JetBrains dev containers
+  # set XDG_CACHE_HOME=/.jbdevcontainer at runtime, so both candidates are allowed.
+  # The sandbox ignores paths that don't exist, so create them for the remote user.
+  REMOTE_USER="${_REMOTE_USER:-root}"
+  REMOTE_USER_HOME="${_REMOTE_USER_HOME:-$(getent passwd "$REMOTE_USER" | cut -d: -f6)}"
+  ensure_user_dir() {
+    local dir="$1"
+    [ -d "$dir" ] && return
+    ensure_user_dir "$(dirname "$dir")"
+    mkdir "$dir"
+    chown "$(id -u "$REMOTE_USER"):$(id -g "$REMOTE_USER")" "$dir"
+  }
+  ensure_user_dir "${REMOTE_USER_HOME}/.cache/gh"
+  ensure_user_dir /.jbdevcontainer/gh
+  echo "  gh cache: ${REMOTE_USER_HOME}/.cache/gh and /.jbdevcontainer/gh writable"
 fi
 
 # Workaround for a podman/buildah quirk: committing this feature's layer drops
